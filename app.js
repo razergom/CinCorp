@@ -11,7 +11,7 @@ const port = 5000;
 // Create database connection
 const dbUsername = 'razergom';
 const dbPassword = 'superpass';
-const dbConnectString = `mongodb+srv://${dbUsername}:${dbPassword}@cinproject-mfszg.mongodb.net/test?retryWrites=true&w=majority`;
+const dbConnectString = `mongodb+srv://${dbUsername}:${dbPassword}@cinproject-mfszg.mongodb.net/cincorp?retryWrites=true&w=majority`;
 
 
 mongoose.connect(dbConnectString, { useNewUrlParser: true })
@@ -23,6 +23,12 @@ const db = mongoose.connection;
 
 // Testing
 let Actor = require('./models/Actor');
+let Producer = require('./models/Producer');
+let Operator = require('./models/Operator');
+let Composer = require('./models/Composer');
+let Impperson = require('./models/Impperson');
+let Screenwriter = require('./models/Screenwriter');
+//let Filmcompany = require('./models/Filmcompany');
 
 
 
@@ -37,13 +43,12 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    Actor.find({}, (err, actors) => {
+    Actor.find((err, actors) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(actors);
+            res.send(actors);
         }
-        res.send('Hello');
     });
 });
 
