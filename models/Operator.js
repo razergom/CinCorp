@@ -8,5 +8,5 @@ let operatorSchema = new Schema({
     country: String
 });
 
-let Operator = mongoose.model('Operator', operatorSchema);
+let Operator = mongoose.model('Operator', operatorSchema, 'operators');
 module.exports = Operator;

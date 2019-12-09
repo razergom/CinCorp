@@ -8,5 +8,5 @@ let screenwriterSchema = new Schema({
     country: String
 });
 
-let Screenwriter = mongoose.model('Screenwriter', screenwriterSchema);
+let Screenwriter = mongoose.model('Screenwriter', screenwriterSchema, 'screenwriters');
 module.exports = Screenwriter;

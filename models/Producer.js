@@ -8,5 +8,5 @@ let producerSchema = new Schema({
     country: String
 });
 
-let Producer = mongoose.model('Producer', producerSchema);
+let Producer = mongoose.model('Producer', producerSchema, 'producers');
 module.exports = Producer;

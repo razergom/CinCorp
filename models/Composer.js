@@ -8,5 +8,5 @@ let composerSchema = new Schema({
     country: String
 });
 
-let Composer = mongoose.model('Composer', composerSchema);
+let Composer = mongoose.model('Composer', composerSchema, 'composers');
 module.exports = Composer;

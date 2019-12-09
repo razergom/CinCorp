@@ -8,5 +8,5 @@ let actorSchema = new Schema({
     country: String
 });
 
-let Actor = mongoose.model('Actor', actorSchema);
+let Actor = mongoose.model('Actor', actorSchema, 'actors');
 module.exports = Actor;

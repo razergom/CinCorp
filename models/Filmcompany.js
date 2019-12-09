@@ -42,5 +42,5 @@ let filmcompanySchema = new Schema({
     ]
 });
 
-let Filmcompany = mongoose.model('Filmcompany', filmcompanySchema);
+let Filmcompany = mongoose.model('Filmcompany', filmcompanySchema, 'filmcompany');
 module.exports = Filmcompany;

@@ -8,5 +8,5 @@ let imppersonSchema = new Schema({
     country: String
 });
 
-let Impperson = mongoose.model('Impperson', imppersonSchema);
+let Impperson = mongoose.model('Impperson', imppersonSchema, 'imppersons');
 module.exports = Impperson;
