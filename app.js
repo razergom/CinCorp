@@ -28,7 +28,7 @@ let Operator = require('./models/Operator');
 let Composer = require('./models/Composer');
 let Impperson = require('./models/Impperson');
 let Screenwriter = require('./models/Screenwriter');
-//let Filmcompany = require('./models/Filmcompany');
+let Filmcompany = require('./models/Filmcompany');
 
 
 
@@ -43,7 +43,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    Actor.find((err, actors) => {
+    Filmcompany.find((err, actors) => {
         if (err) {
             console.log(err);
         } else {

@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
-const dbref = require("mongoose-dbref");
-const utils = dbref.utils;
-
-let loaded = dbref.install(mongoose);
 
 const DBRef = mongoose.SchemaType.DBRef;
 const Schema = mongoose.Schema;
+
 
 let filmcompanySchema = new Schema({
     name: String,
@@ -16,13 +13,13 @@ let filmcompanySchema = new Schema({
         year_found: String,
         website: String
     },
-    founder: DBRef,
+    founder: { $ref: String, $id: Schema.ObjectId },
     website: String,
     movies: [
         {
             title: String,
             year: String,
-            director: DBRef,
+            director: { $ref: String, $id: Schema.ObjectId },
             genre: String,
             rating: String,
             budget: String,
@@ -30,17 +27,18 @@ let filmcompanySchema = new Schema({
             time: String,
             actors: [
                 {
-                    actor: DBRef,
+                    actor: { $ref: String, $id: Schema.ObjectId },
                     role: String
                 }
             ],
-            producers: [DBRef],
-            composers: [DBRef],
-            screenwriters: [DBRef],
-            operators: [DBRef]
+            producers: [{ $ref: String, $id: Schema.ObjectId }],
+            composers: [{ $ref: String, $id: Schema.ObjectId }],
+            screenwriters: [{ $ref: String, $id: Schema.ObjectId }],
+            operators: [{ $ref: String, $id: Schema.ObjectId }]
         }
     ]
 });
+
 
 let Filmcompany = mongoose.model('Filmcompany', filmcompanySchema, 'filmcompany');
 module.exports = Filmcompany;
