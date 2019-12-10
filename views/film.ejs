@@ -1,6 +1,6 @@
 <%- include('header.ejs'); %>
 
-        <section class="jumbotron text-center" style="margin-top:10%">
+        <section class="jumbotron text-center">
             <div class="container">
                 <h3 class="jumbotron-heading"><%= movie.title %></h1>
                 <p class="lead">Year: <%= movie.year %></p>
@@ -13,8 +13,9 @@
             </div>
         </section>
 
-        <% if (actors.length > 0) { %>
-        <table class="table table-striped" style="margin-top:5%">
+        <h3 class="film-h">Actors</h3>
+        <% if (movie.actors.length > 0) { %>
+        <table class="table table-striped film-table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -26,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% actors.forEach((actor, index) => { %>
+                <% movie.actors.forEach((actor, index) => { %>
                 <tr>
                     <td><%= actor.name %></td>
                     <td><%= actor.role %></td>
@@ -35,24 +36,127 @@
                     <td><%= actor.died %></td>
 
                     <td>
-                        <a href="/lucasfilm/<%= movie %>/<%= actor.name %>" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                     </td>
                 </tr>
                 <% }) %>
             </tbody>
         </table>
+        <div class="film-btn">
+            <a href="#" class="btn btn-secondary">Add Actor</a>
+        </div>
         <% } else { %>
         <p class="text-center">No actors found. Go <a href="#">here</a> to add actors.</p>
         <% } %>
+
+
+        <h3 class="film-h">Producers</h3>
+        <% if (movie.producers.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.producers.forEach((producer, index) => { %>
+                <tr>
+                    <td><%= producer.name %></td>
+                    <td><%= producer.year %></td>
+                    <td><%= producer.country %></td>
+                    <td><%= producer.died %></td>
+        
+                    <td>
+                        <a href="#" rel="noopener"
+                            class="btn btn-sm btn-primary">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="#" class="btn btn-secondary">Add Producer</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No producers found. Go <a href="#">here</a> to add producers.</p>
+        <% } %>
+
+
+        <h3 class="film-h">Screenwriters</h3>
+        <% if (movie.screenwriters.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.screenwriters.forEach((screenwriter, index) => { %>
+                <tr>
+                    <td><%= screenwriter.name %></td>
+                    <td><%= screenwriter.year %></td>
+                    <td><%= screenwriter.country %></td>
+                    <td><%= screenwriter.died %></td>
+        
+                    <td>
+                        <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="#" class="btn btn-secondary">Add Screenwriter</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No screenwriters found. Go <a href="#">here</a> to add screenwriters.</p>
+        <% } %>
+
+
+        <h3 class="film-h">Operators</h3>
+        <% if (movie.operators.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.operators.forEach((operator, index) => { %>
+                <tr>
+                    <td><%= operator.name %></td>
+                    <td><%= operator.year %></td>
+                    <td><%= operator.country %></td>
+                    <td><%= operator.died %></td>
+        
+                    <td>
+                        <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="#" class="btn btn-secondary">Add Operator</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No operators found. Go <a href="#">here</a> to add operators.</p>
+        <% } %>
     </body>
 </html>
-
-title: String,
-year: String,
-director: { $ref: String, $id: Schema.ObjectId },
-genre: String,
-rating: String,
-budget: String,
-earn: String,
-time: String,

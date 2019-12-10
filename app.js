@@ -34,7 +34,7 @@ let Filmcompany = require('./models/Filmcompany');
 
 
 const { getHomePage } = require('./routes/home');
-const { getFilmsPage } = require('./routes/films');
+const { getFilmsPage, getFilmPage } = require('./routes/films');
 
 
 
@@ -57,6 +57,7 @@ app.get('/', (req, res) => {
 });
 app.get('/home', getHomePage);
 app.get('/films', getFilmsPage);
+app.get('/films/:title', getFilmPage);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
