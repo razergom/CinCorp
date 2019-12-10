@@ -15,7 +15,6 @@ module.exports = {
     },
     getFilmPage: (req, res) => {
         const movie_id = req.params.title;
-        console.log(movie_id);
         /*
         Filmcompany.findOne((err, result) => {
             if (err) {
@@ -32,26 +31,33 @@ module.exports = {
             }
         });
         */
-       /*
+       
        Filmcompany.findOne()
-        .populate('actors')
-        .populate('producers')
-        .populate('operators')
-        .populate('imppersons')
-        .populate('composers')
-        .populate('screenwriters')
+        .populate('movies.director')
+        .populate('movies.actors.actor')
+        .populate('movies.operators')
+        .populate('movies.producers')
+        .populate('movies.screenwriters')
+        .populate('movies.composers')
         .exec((err, result) => {
-            console.log(result.movies[0].actors[0].name);
+            if (err) {
+                console.log(err);
+            } else {
+                const movie = result.movies.filter(movie => {
+                    return movie.title === movie_id;
+                }).pop();
+
+                console.log(movie);
+                console.log(movie.actors[0]);
+                
+                
+
+                res.render('film.ejs', {
+                    title: result.name,
+                    movie: movie
+                });
+            }
         });
-        */
-        Filmcompany.findOne()
-            .populate('actors')
-            .exec((err, result) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(result.movies[0].actors[1].name);
-                }
-            });
+        
     }
 }

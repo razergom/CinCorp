@@ -19,7 +19,6 @@ mongoose.connect(dbConnectString, { useNewUrlParser: true })
     .catch(err => console.log(err));
 const db = mongoose.connection;
 
-// Test comment
 
 
 

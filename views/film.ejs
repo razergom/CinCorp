@@ -4,7 +4,7 @@
             <div class="container">
                 <h3 class="jumbotron-heading"><%= movie.title %></h1>
                 <p class="lead">Year: <%= movie.year %></p>
-                <p class="lead">Director: <%= movie.director %></p>
+                <p class="lead">Director: <%= movie.director.name %></p>
                 <p class="lead">Genre: <%= movie.genre %></p>
                 <p class="lead">Rating: <%= movie.rating %></p>
                 <p class="lead">Budget: <%= movie.budget %></p>
@@ -29,11 +29,11 @@
             <tbody>
                 <% movie.actors.forEach((actor, index) => { %>
                 <tr>
-                    <td><%= actor.name %></td>
+                    <td><%= actor.actor.name %></td>
                     <td><%= actor.role %></td>
-                    <td><%= actor.year %></td>
-                    <td><%= actor.country %></td>
-                    <td><%= actor.died %></td>
+                    <td><%= actor.actor.born %></td>
+                    <td><%= actor.actor.country %></td>
+                    <td><%= actor.actor.died %></td>
 
                     <td>
                         <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
@@ -67,7 +67,7 @@
                 <% movie.producers.forEach((producer, index) => { %>
                 <tr>
                     <td><%= producer.name %></td>
-                    <td><%= producer.year %></td>
+                    <td><%= producer.born %></td>
                     <td><%= producer.country %></td>
                     <td><%= producer.died %></td>
         
@@ -104,7 +104,7 @@
                 <% movie.screenwriters.forEach((screenwriter, index) => { %>
                 <tr>
                     <td><%= screenwriter.name %></td>
-                    <td><%= screenwriter.year %></td>
+                    <td><%= screenwriter.born %></td>
                     <td><%= screenwriter.country %></td>
                     <td><%= screenwriter.died %></td>
         
@@ -140,7 +140,7 @@
                 <% movie.operators.forEach((operator, index) => { %>
                 <tr>
                     <td><%= operator.name %></td>
-                    <td><%= operator.year %></td>
+                    <td><%= operator.born %></td>
                     <td><%= operator.country %></td>
                     <td><%= operator.died %></td>
         
@@ -176,7 +176,7 @@
                 <% movie.composers.forEach((composer, index) => { %>
                 <tr>
                     <td><%= composer.name %></td>
-                    <td><%= composer.year %></td>
+                    <td><%= composer.born %></td>
                     <td><%= composer.country %></td>
                     <td><%= composer.died %></td>
         
