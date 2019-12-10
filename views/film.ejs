@@ -158,5 +158,41 @@
         <% } else { %>
         <p class="text-center">No operators found. Go <a href="#">here</a> to add operators.</p>
         <% } %>
+
+
+        <h3 class="film-h">Composers</h3>
+        <% if (movie.composers.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.composers.forEach((composer, index) => { %>
+                <tr>
+                    <td><%= composer.name %></td>
+                    <td><%= composer.year %></td>
+                    <td><%= composer.country %></td>
+                    <td><%= composer.died %></td>
+        
+                    <td>
+                        <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="#" class="btn btn-secondary">Add Composer</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No composers found. Go <a href="#">here</a> to add composers.</p>
+        <% } %>
     </body>
 </html>
