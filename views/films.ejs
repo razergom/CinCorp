@@ -1,0 +1,33 @@
+<%- include('header.ejs'); %>
+
+        <% if (movies.length > 0) { %>
+        <table class="table table-striped" style="margin-top:5%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Genre</th>
+                    <th>Rating</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movies.forEach((movie, index) => { %>
+                <tr>
+                    <td><%= movie.title %></td>
+                    <td><%= movie.year %></td>
+                    <td><%= movie.genre %></td>
+                    <td><%= movie.rating %></td>
+                    <td>
+                        <a href="/lucasfilm/<%= movie.title %>" rel="noopener" class="btn btn-sm btn-primary">View</a>
+                        <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <p class="text-center">No Movies Found. Go <a href="#">here</a> to add movies.</p>
+        <% } %>
+    </body>
+</html>
