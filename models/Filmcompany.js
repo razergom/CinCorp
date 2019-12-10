@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 
-const DBRef = mongoose.SchemaType.DBRef;
 const Schema = mongoose.Schema;
+
+let Actor = require('./Actor');
+let Producer = require('./Producer');
+let Operator = require('./Operator');
+let Composer = require('./Composer');
+let Impperson = require('./Impperson');
+let Screenwriter = require('./Screenwriter');
 
 
 let filmcompanySchema = new Schema({
@@ -27,7 +33,7 @@ let filmcompanySchema = new Schema({
             time: String,
             actors: [
                 {
-                    actor: { $ref: String, $id: Schema.ObjectId },
+                    actor: { type: Schema.Types.ObjectId, ref: 'Actor' },
                     role: String
                 }
             ],
