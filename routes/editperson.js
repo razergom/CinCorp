@@ -22,6 +22,46 @@ module.exports = {
                     });
                 });
                 break;
+            case 'producers':
+                Producer.find({ _id: person_id }, (req, result) => {
+                    console.log(result);
+
+                    res.render('editperson.ejs', {
+                        person: result.pop(),
+                        title: 'Editing person'
+                    });
+                });
+                break;
+            case 'operators':
+                Operator.find({ _id: person_id }, (req, result) => {
+                    console.log(result);
+
+                    res.render('editperson.ejs', {
+                        person: result.pop(),
+                        title: 'Editing person'
+                    });
+                });
+                break;
+            case 'screenwriters':
+                Screenwriter.find({ _id: person_id }, (req, result) => {
+                    console.log(result);
+
+                    res.render('editperson.ejs', {
+                        person: result.pop(),
+                        title: 'Editing person'
+                    });
+                });
+                break;
+            case 'composers':
+                Composer.find({ _id: person_id }, (req, result) => {
+                    console.log(result);
+
+                    res.render('editperson.ejs', {
+                        person: result.pop(),
+                        title: 'Editing person'
+                    });
+                });
+                break;
         }
     }
 }

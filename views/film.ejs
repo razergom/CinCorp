@@ -36,7 +36,7 @@
                     <td><%= actor.actor.died %></td>
 
                     <td>
-                        <a href="/edit/actors/<%= actor.actor._id %>" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/films/<%= movie.title %>/edit/actors/<%= actor.actor._id %>" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                     </td>
                 </tr>
@@ -44,7 +44,7 @@
             </tbody>
         </table>
         <div class="film-btn">
-            <a href="#" class="btn btn-secondary">Add Actor</a>
+            <a href="/films/<%= movie.title %>/add/actors" class="btn btn-secondary">Add Actor</a>
         </div>
         <% } else { %>
         <p class="text-center">No actors found. Go <a href="#">here</a> to add actors.</p>
@@ -72,7 +72,7 @@
                     <td><%= producer.died %></td>
         
                     <td>
-                        <a href="#" rel="noopener"
+                        <a href="/films/<%= movie.title %>/edit/producers/<%= producer._id %>" rel="noopener"
                             class="btn btn-sm btn-primary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                     </td>
@@ -81,7 +81,7 @@
             </tbody>
         </table>
         <div class="film-btn">
-            <a href="#" class="btn btn-secondary">Add Producer</a>
+            <a href="/films/<%= movie.title %>/add/producers" class="btn btn-secondary">Add Producer</a>
         </div>
         <% } else { %>
         <p class="text-center">No producers found. Go <a href="#">here</a> to add producers.</p>
@@ -109,7 +109,7 @@
                     <td><%= screenwriter.died %></td>
         
                     <td>
-                        <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/films/<%= movie.title %>/edit/screenwriters/<%= screenwriter._id %>" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                     </td>
                 </tr>
@@ -117,7 +117,7 @@
             </tbody>
         </table>
         <div class="film-btn">
-            <a href="#" class="btn btn-secondary">Add Screenwriter</a>
+            <a href="/films/<%= movie.title %>/add/screenwriters" class="btn btn-secondary">Add Screenwriter</a>
         </div>
         <% } else { %>
         <p class="text-center">No screenwriters found. Go <a href="#">here</a> to add screenwriters.</p>
@@ -145,7 +145,7 @@
                     <td><%= operator.died %></td>
         
                     <td>
-                        <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/films/<%= movie.title %>/edit/operators/<%= operator._id %>" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                     </td>
                 </tr>
@@ -153,7 +153,7 @@
             </tbody>
         </table>
         <div class="film-btn">
-            <a href="#" class="btn btn-secondary">Add Operator</a>
+            <a href="/films/<%= movie.title %>/add/operators" class="btn btn-secondary">Add Operator</a>
         </div>
         <% } else { %>
         <p class="text-center">No operators found. Go <a href="#">here</a> to add operators.</p>
@@ -181,7 +181,7 @@
                     <td><%= composer.died %></td>
         
                     <td>
-                        <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/films/<%= movie.title %>/edit/composers/<%= composer._id %>" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                     </td>
                 </tr>
@@ -189,7 +189,7 @@
             </tbody>
         </table>
         <div class="film-btn">
-            <a href="#" class="btn btn-secondary">Add Composer</a>
+            <a href="/films/<%= movie.title %>/add/composers" class="btn btn-secondary">Add Composer</a>
         </div>
         <% } else { %>
         <p class="text-center">No composers found. Go <a href="#">here</a> to add composers.</p>

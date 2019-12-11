@@ -1,0 +1,47 @@
+<%- include('header.ejs'); %>
+
+<h3 class="person-h">Adding Film</h3>
+<form action="" method="post" enctype="multipart/form-data" class="person-edit-form">
+    <div class="form-group">
+        <label for="movie-title">Title</label>
+        <input type="text" class="form-control" name="movie_title" id="movie_title" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-director">Director</label>
+        <select id="movie_director" name="movie_director" class="form-control" required>
+            <% directors.forEach((director, index) => { %>
+                <option><%= director.name %> (<%= director._id %>)</option>
+            <% }) %>
+        </select>
+    </div>
+    <p class="text-center">No needed director in list? Go <a href="#">here</a> to add this director.</p>
+    <div class="form-group">
+        <label for="movie-year">Year</label>
+        <input type="text" class="form-control" name="movie_year" id="movie_year" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-genre">Genre</label>
+        <input type="text" class="form-control" name="movie_genre" id="movie_genre" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-rating">Rating</label>
+        <input type="text" class="form-control" name="movie_rating" id="movie_rating" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-budget">Budget</label>
+        <input type="text" class="form-control" name="movie_budget" id="movie_budget" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-earn">Earn</label>
+        <input type="text" class="form-control" name="movie_earn" id="movie_earn" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-time">Time</label>
+        <input type="text" class="form-control" name="movie_time" id="movie_time" required>
+    </div>
+    <button type="submit" class="btn btn-success float-center person-edit-btn">Add Film</button>
+</form>
+
+</body>
+
+</html>

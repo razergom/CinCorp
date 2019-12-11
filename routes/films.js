@@ -29,6 +29,8 @@ module.exports = {
                 const movie = result.movies.filter(movie => {
                     return movie.title === movie_title;
                 }).pop();
+                console.log(movie.actors[0].actor.name);
+                
 
                 res.render('film.ejs', {
                     title: result.name,

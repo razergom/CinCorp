@@ -35,6 +35,8 @@ let Filmcompany = require('./models/Filmcompany');
 const { getHomePage } = require('./routes/home');
 const { getFilmsPage, getFilmPage } = require('./routes/films');
 const { getEditPersonPage } = require('./routes/editperson');
+const { getAddPersonPage } = require('./routes/addperson');
+const { getAddFilmPage } = require('./routes/addfilm');
 
 
 
@@ -42,23 +44,17 @@ app.set('port', process.env.port || port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-    Filmcompany.find((err, actors) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send(actors);
-        }
-    });
-});
+
 app.get('/home', getHomePage);
 app.get('/films', getFilmsPage);
 app.get('/films/:title', getFilmPage);
-app.get('/edit/:collection/:id', getEditPersonPage);
+app.get('/films/:moviename/edit/:collection/:id', getEditPersonPage);
+app.get('/films/:moviename/add/:collection', getAddPersonPage);
+app.get('/add/films/', getAddFilmPage);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
