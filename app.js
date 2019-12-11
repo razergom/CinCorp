@@ -34,6 +34,7 @@ let Filmcompany = require('./models/Filmcompany');
 
 const { getHomePage } = require('./routes/home');
 const { getFilmsPage, getFilmPage } = require('./routes/films');
+const { getEditPersonPage } = require('./routes/editperson');
 
 
 
@@ -57,6 +58,7 @@ app.get('/', (req, res) => {
 app.get('/home', getHomePage);
 app.get('/films', getFilmsPage);
 app.get('/films/:title', getFilmPage);
+app.get('/edit/:collection/:id', getEditPersonPage);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

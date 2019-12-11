@@ -14,25 +14,8 @@ module.exports = {
         });
     },
     getFilmPage: (req, res) => {
-        const movie_id = req.params.title;
-        /*
-        Filmcompany.findOne((err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                const movie = result.movies.filter(movie => {
-                    return movie.title === movie_id;
-                }).pop();
-                
-                res.render('film.ejs', {
-                    title: result.name,
-                    movie: movie
-                });
-            }
-        });
-        */
-       
-       Filmcompany.findOne()
+        const movie_title = req.params.title;
+        Filmcompany.findOne()
         .populate('movies.director')
         .populate('movies.actors.actor')
         .populate('movies.operators')
@@ -44,13 +27,8 @@ module.exports = {
                 console.log(err);
             } else {
                 const movie = result.movies.filter(movie => {
-                    return movie.title === movie_id;
+                    return movie.title === movie_title;
                 }).pop();
-
-                console.log(movie);
-                console.log(movie.actors[0]);
-                
-                
 
                 res.render('film.ejs', {
                     title: result.name,
