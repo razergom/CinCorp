@@ -1,0 +1,25 @@
+<%- include('header.ejs'); %>
+
+            <h3 class="person-h">Adding Person</h3>
+            <form action="" method="post" enctype="multipart/form-data" class="person-edit-form">
+                <div class="form-group">
+                    <label for="existed-actor">Choose Existing Person</label>
+                    <select id="existed_actor" name="existed_actor" class="form-control" required>
+                        <% persons.forEach((pers, index) => { %>
+                            <option><%= pers.name %> (<%= pers._id %>)</option>
+                        <% }) %>
+                    </select>
+                </div>
+                <p class="text-center">No needed person in list? Go <a href="#">here</a> to add this person.</p>
+                <% if (collection == 'actors') { %>
+                    <div class="form-group">
+                        <label for="person-role">Role</label>
+                        <input type="text" class="form-control" name="person_role" id="person_role" required>
+                    </div>
+                <% } %>
+                
+                <button type="submit" class="btn btn-success float-center person-edit-btn">Add Person</button>
+            </form>
+    </body>
+</html>
+

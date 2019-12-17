@@ -7,7 +7,7 @@ let Impperson = require('../models/Impperson');
 let Screenwriter = require('../models/Screenwriter');
 
 module.exports = {
-    getEditPersonPage: (req, res) => {
+    getEditPersonFilmPage: (req, res) => {
         const person_id = req.params.id;
         const collection = req.params.collection;
         
@@ -43,7 +43,7 @@ module.exports = {
                 });
                 break;
             case 'screenwriters':
-                Screenwriter.find({ _id: person_id }, (req, result) => {
+                Impperson.find({ _id: person_id }, (req, result) => {
                     console.log(result);
 
                     res.render('editperson.ejs', {

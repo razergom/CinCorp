@@ -6,7 +6,7 @@ let Impperson = require('../models/Impperson');
 let Screenwriter = require('../models/Screenwriter');
 
 module.exports = {
-    getAddPersonPage: (req, res) => {
+    getAddPersonFilmPage: (req, res) => {
         const moviename = req.params.moviename;
         const collection = req.params.collection;
         
@@ -14,7 +14,7 @@ module.exports = {
         switch (collection) {
             case 'actors':
                 Actor.find((req, result) => {
-                    res.render('addperson.ejs', {
+                    res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection
@@ -23,7 +23,7 @@ module.exports = {
                 break;
             case 'producers':
                 Producer.find((req, result) => {
-                    res.render('addperson.ejs', {
+                    res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection
@@ -32,7 +32,7 @@ module.exports = {
                 break;
             case 'operators':
                 Operator.find((req, result) => {
-                    res.render('addperson.ejs', {
+                    res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection
@@ -40,8 +40,8 @@ module.exports = {
                 });
                 break;
             case 'screenwriters':
-                Screenwriter.find((req, result) => {
-                    res.render('addperson.ejs', {
+                Impperson.find((req, result) => {
+                    res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection
@@ -50,7 +50,7 @@ module.exports = {
                 break;
             case 'composers':
                 Composer.find((req, result) => {
-                    res.render('addperson.ejs', {
+                    res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection

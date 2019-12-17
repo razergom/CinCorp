@@ -1,0 +1,40 @@
+<%- include('header.ejs'); %>
+
+<h3 class="persons-h"><%= collectionForOutput %></h3>
+<% if (persons.length > 0) { %>
+<table class="table table-striped film-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Year Of Birth</th>
+            <th>Country</th>
+            <th>Died</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% persons.forEach((person, index) => { %>
+        <tr>
+            <td><%= person.name %></td>
+            <td><%= person.born %></td>
+            <td><%= person.country %></td>
+            <td><%= person.died %></td>
+
+            <td>
+                <a href="/persons/<%= collection %>/edit/<%= person._id %>" rel="noopener"
+                    class="btn btn-sm btn-primary">Edit</a>
+                <a href="/persons/<%= collection %>/delete/<%= person._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+            </td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+<div class="film-btn">
+    <a href="/persons/<%= collection %>/add" class="btn btn-secondary">Add Person</a>
+</div>
+<% } else { %>
+<p class="text-center">No persons found. Go <a href="/persons/<%= collection %>/add">here</a> to add persons.</p>
+<% } %>
+
+    </body>
+</html>

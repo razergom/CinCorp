@@ -6,7 +6,7 @@ module.exports = {
         
         Impperson.find((err, result) => {
             if (err) {
-                //console.log(err);
+                console.log(err);
             } else {
                 res.render('addfilm.ejs', {
                     title: 'Lucasfilm',

@@ -39,7 +39,7 @@ let filmcompanySchema = new Schema({
             ],
             producers: [{ type: Schema.Types.ObjectId, ref: 'Producer' }],
             composers: [{ type: Schema.Types.ObjectId, ref: 'Composer' }],
-            screenwriters: [{ type: Schema.Types.ObjectId, ref: 'Screenwriter' }],
+            screenwriters: [{ type: Schema.Types.ObjectId, ref: 'Impperson' }],
             operators: [{ type: Schema.Types.ObjectId, ref: 'Operator' }]
         }
     ]
