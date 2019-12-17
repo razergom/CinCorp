@@ -56,6 +56,7 @@ app.get('/films/:moviename/edit', getEditFilmPage);
 app.post('/films/:moviename/edit', editFilm);
 app.get('/films/:moviename/add/:collection', getAddPersonFilmPage);
 app.post('/films/:moviename/add/:collection', addPersonFilm);
+app.get('/films/:moviename/delete/:collection/:id', deletePersonFilm);
 
 //app.get('/films/:moviename/edit/:collection/:id', getEditPersonPage); replace function later
 //app.get('/films/:moviename/add/:collection', getAddPersonFilmPage);
