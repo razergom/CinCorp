@@ -11,6 +11,10 @@
                 <p class="lead">Earn: <%= movie.earn %></p>
                 <p class="lead">Time: <%= movie.time %></p>
             </div>
+
+            <div class="film-btn">
+                <a href="/films/<%= movie.title %>/edit" class="btn btn-secondary">Edit Information</a>
+            </div>
         </section>
 
         <h3 class="film-h">Actors</h3>

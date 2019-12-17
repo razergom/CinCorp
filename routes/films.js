@@ -104,7 +104,69 @@ module.exports = {
             }
         });
     },
-    editFilm: (req, res) => {
+    getEditFilmPage: (req, res) => {
+        Filmcompany.findOne()
+            .populate('movies.director')
+            .exec((err, result) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    const movie = result.movies.filter(movie => {
+                        return movie.title === req.params.moviename;
+                    }).pop();
 
+                    Impperson.find((err, directors) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.render('editfilm.ejs', {
+                                title: result.name,
+                                movie: movie,
+                                directors: directors
+                            });
+                        }
+                    })
+                }
+            });
+    },
+    editFilm: (req, res) => {
+        let title = req.body.movie_title;
+        let year = req.body.movie_year;
+        let genre = req.body.movie_genre;
+        let rating = req.body.movie_rating;
+        let budget = req.body.movie_budget;
+        let earn = req.body.movie_earn;
+        let time = req.body.movie_time;
+
+        let directorUnprocessed = req.body.movie_director; // extract id from ()
+        var regExp = /\(([^)]+)\)/;
+        var matches = regExp.exec(directorUnprocessed);
+        let director = matches[1];
+
+        Filmcompany.findOne((err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                let movie = result.movies.filter(movie => {
+                    return movie.title === req.params.moviename;
+                }).pop();
+                
+                movie.title = title;
+                movie.year = year;
+                movie.genre = genre;
+                movie.rating = rating;
+                movie.budget = budget;
+                movie.earn = earn;
+                movie.time = time;
+
+                result.save(err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect(`/films/${title}`);
+                    }
+                });
+            }
+        });
     }
 }
