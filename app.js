@@ -21,6 +21,7 @@ app.set('port', process.env.port || port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+mongoose.set('debug', true);
 mongoose.connect(dbConnectString, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err));
@@ -40,12 +41,9 @@ let Filmcompany = require('./models/Filmcompany');
 
 
 const { getHomePage } = require('./routes/home');
-const { getFilmsPage, getFilmPage } = require('./routes/films');
+const { getFilmsPage, getFilmPage, getAddFilmPage, addFilm, deleteFilm } = require('./routes/films');
 const { getAddPersonFilmPage } = require('./routes/addpersonfilm');
-const { getAddFilmPage } = require('./routes/addfilm');
 const { getCollectionPage, getAddPersonPage, getEditPersonPage, addPerson, deletePerson, editPerson } = require('./routes/persons');
-
-
 
 
 app.get('/home', getHomePage);
@@ -54,7 +52,9 @@ app.get('/films', getFilmsPage);
 app.get('/films/:title', getFilmPage);
 //app.get('/films/:moviename/edit/:collection/:id', getEditPersonPage); replace function later
 app.get('/films/:moviename/add/:collection', getAddPersonFilmPage);
-app.get('/add/films/', getAddFilmPage);
+app.get('/add/films', getAddFilmPage);
+app.post('/add/films', addFilm);
+app.get('/films/:moviename/delete', deleteFilm);
 
 app.get('/persons/:collection', getCollectionPage);
 app.get('/persons/:collection/add', getAddPersonPage);
