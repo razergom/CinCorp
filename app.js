@@ -41,8 +41,7 @@ let Filmcompany = require('./models/Filmcompany');
 
 
 const { getHomePage } = require('./routes/home');
-const { getFilmsPage, getFilmPage, getAddFilmPage, getEditFilmPage, editFilm, addFilm, deleteFilm } = require('./routes/films');
-const { getAddPersonFilmPage } = require('./routes/addpersonfilm');
+const { getFilmsPage, getFilmPage, getAddFilmPage, getEditFilmPage, editFilm, addFilm, deleteFilm, getAddPersonFilmPage, addPersonFilm, deletePersonFilm } = require('./routes/films');
 const { getCollectionPage, getAddPersonPage, getEditPersonPage, addPerson, deletePerson, editPerson } = require('./routes/persons');
 
 
@@ -55,6 +54,8 @@ app.post('/add/films', addFilm);
 app.get('/films/:moviename/delete', deleteFilm);
 app.get('/films/:moviename/edit', getEditFilmPage);
 app.post('/films/:moviename/edit', editFilm);
+app.get('/films/:moviename/add/:collection', getAddPersonFilmPage);
+app.post('/films/:moviename/add/:collection', addPersonFilm);
 
 //app.get('/films/:moviename/edit/:collection/:id', getEditPersonPage); replace function later
 //app.get('/films/:moviename/add/:collection', getAddPersonFilmPage);

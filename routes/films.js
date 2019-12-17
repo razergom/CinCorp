@@ -1,4 +1,8 @@
 const Filmcompany = require('../models/Filmcompany');
+const Actor = require('../models/Actor');
+const Producer = require('../models/Producer');
+const Operator = require('../models/Operator');
+const Composer = require('../models/Composer');
 const Impperson = require('../models/Impperson');
 
 module.exports = {
@@ -159,6 +163,162 @@ module.exports = {
                 movie.earn = earn;
                 movie.time = time;
 
+                result.save(err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect(`/films/${title}`);
+                    }
+                });
+            }
+        });
+    },
+    getAddPersonFilmPage: (req, res) => {
+        const moviename = req.params.moviename;
+        const collection = req.params.collection;
+
+
+        switch (collection) {
+            case 'actors':
+                Actor.find((req, result) => {
+                    res.render('addpersonfilm.ejs', {
+                        persons: result,
+                        title: 'Lucasfilm',
+                        collection: collection
+                    });
+                });
+                break;
+            case 'producers':
+                Producer.find((req, result) => {
+                    res.render('addpersonfilm.ejs', {
+                        persons: result,
+                        title: 'Lucasfilm',
+                        collection: collection
+                    });
+                });
+                break;
+            case 'operators':
+                Operator.find((req, result) => {
+                    res.render('addpersonfilm.ejs', {
+                        persons: result,
+                        title: 'Lucasfilm',
+                        collection: collection
+                    });
+                });
+                break;
+            case 'screenwriters':
+                Impperson.find((req, result) => {
+                    res.render('addpersonfilm.ejs', {
+                        persons: result,
+                        title: 'Lucasfilm',
+                        collection: collection
+                    });
+                });
+                break;
+            case 'composers':
+                Composer.find((req, result) => {
+                    res.render('addpersonfilm.ejs', {
+                        persons: result,
+                        title: 'Lucasfilm',
+                        collection: collection
+                    });
+                });
+                break;
+        }
+    },
+    addPersonFilm: (req, res) => {
+        let title = req.params.moviename;
+        let collection = req.params.collection;
+
+        let personUnprocessed = req.body.existed_person; // extract id from ()
+        
+        var regExp = /\(([^)]+)\)/;
+        var matches = regExp.exec(personUnprocessed);
+        let person_id = matches[1];
+
+
+        Filmcompany.findOne((err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                let movie = result.movies.filter(movie => {
+                    return movie.title === req.params.moviename;
+                }).pop();
+                switch (collection) {
+                    case 'actors':
+                        let actor = {};
+                        actor.actor = person_id;
+                        actor.role = req.body.person_role;
+                        movie.actors.push(actor);
+                        break;
+                    case 'operators':
+                        movie.operators.push(person_id);
+                        break;
+                    case 'screenwriters':
+                        movie.screenwriters.push(person_id);
+                        break;
+                    case 'composers':
+                        movie.composers.push(person_id);
+                        break;
+                    case 'producers':
+                        movie.producers.push(person_id);
+                        break;
+                }
+                result.save(err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect(`/films/${title}`);
+                    }
+                });
+            }
+        });
+    },
+    deletePersonFilm: (req, res) => {
+        let title = req.params.moviename;
+        let collection = req.params.collection;
+        let person_id = req.params.id;
+
+        Filmcompany.findOne((err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                let movie = result.movies.filter(movie => {
+                    return movie.title === req.params.moviename;
+                }).pop();
+                switch (collection) {
+                    case 'actors':
+                        let actors = movie.actors.filter(actor => {
+                            return actor.actor == person_id;
+                        });
+                        actors.pop().remove();
+                        break;
+                    case 'operators':
+                        let operators = movie.operators.filter(operator => {
+                            return operator == person_id;
+                        });
+                        operators.pop().remove();
+                        break;
+                    case 'screenwriters':
+                        let screenwriters = movie.screenwriters.filter(screenwriter => {
+                            return screenwriter == person_id;
+                        });
+                        screenwriters.pop().remove();
+                        break;
+                    case 'composers':
+                        let composers = movie.composers.filter(composer => {
+                            return composer == person_id;
+                        });
+                        composers.pop().remove();
+                        break;
+                    case 'producers':
+                        let producers = movie.producers.filter(producer => {
+                            return producer == person_id;
+                        });
+                        
+                        producers.pop().remove();
+                        break;
+                }
                 result.save(err => {
                     if (err) {
                         console.log(err);
