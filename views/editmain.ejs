@@ -1,0 +1,18 @@
+<%- include('header.ejs'); %>
+
+<h3 class="person-h">Editing Main Information</h3>
+<form action="" method="post" class="person-edit-form">
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" name="description" id="description" value="<%= company.description %>" required>
+    </div>
+    <div class="form-group">
+        <label for="website">Website</label>
+        <input type="text" class="form-control" name="website" id="website" value="<%= company.website %>" required>
+    </div>
+    <button type="submit" class="btn btn-success float-center person-edit-btn">Update Information</button>
+</form>
+
+</body>
+
+</html>

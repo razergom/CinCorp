@@ -40,7 +40,7 @@
                     <td><%= actor.actor.died %></td>
 
                     <td>
-                        <a href="#" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/films/<%= movie.title %>/edit/actors/<%= actor.actor._id %>" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
                         <a href="/films/<%= movie.title %>/delete/actors/<%= actor.actor._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                     </td>
                 </tr>

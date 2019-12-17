@@ -326,10 +326,44 @@ module.exports = {
             }
         });
     },
-    getEditActorFilm:(req, res) => {
-        
+    getEditActorFilmPage:(req, res) => {
+        Filmcompany.findOne((err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                let movie = result.movies.filter(movie => {
+                    return movie.title === req.params.moviename;
+                }).pop();
+                let actor = movie.actors.filter(actor => {
+                    return actor.actor == req.params.id;
+                }).pop();
+                res.render('editactorfilm.ejs', {
+                    title: 'Lucasfilm',
+                    actor: actor
+                });
+            }
+        });
     },
     editActorFilm: (req, res) => {
-
+        Filmcompany.findOne((err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                let movie = result.movies.filter(movie => {
+                    return movie.title === req.params.moviename;
+                }).pop();
+                let actor = movie.actors.filter(actor => {
+                    return actor.actor == req.params.id;
+                }).pop();
+                actor.role = req.body.person_role;
+                result.save(err => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect(`/films/${req.params.moviename}`);
+                    }
+                });
+            }
+        });
     }
 }

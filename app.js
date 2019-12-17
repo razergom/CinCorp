@@ -40,12 +40,16 @@ let Screenwriter = require('./models/Screenwriter');
 let Filmcompany = require('./models/Filmcompany');
 
 
-const { getHomePage } = require('./routes/home');
-const { getFilmsPage, getFilmPage, getAddFilmPage, getEditFilmPage, editFilm, addFilm, deleteFilm, getAddPersonFilmPage, addPersonFilm, deletePersonFilm } = require('./routes/films');
+const { getHomePage, getEditMainInfoPage, editMainInfo } = require('./routes/home');
+const { getFilmsPage, getFilmPage, getAddFilmPage, getEditFilmPage, editFilm,
+        addFilm, deleteFilm, getAddPersonFilmPage, addPersonFilm, deletePersonFilm, getEditActorFilmPage,
+        editActorFilm } = require('./routes/films');
 const { getCollectionPage, getAddPersonPage, getEditPersonPage, addPerson, deletePerson, editPerson } = require('./routes/persons');
 
 
 app.get('/home', getHomePage);
+app.get('/home/edit', getEditMainInfoPage);
+app.post('/home/edit', editMainInfo);
 
 app.get('/films', getFilmsPage);
 app.get('/films/:title', getFilmPage);
@@ -57,9 +61,9 @@ app.post('/films/:moviename/edit', editFilm);
 app.get('/films/:moviename/add/:collection', getAddPersonFilmPage);
 app.post('/films/:moviename/add/:collection', addPersonFilm);
 app.get('/films/:moviename/delete/:collection/:id', deletePersonFilm);
+app.get('/films/:moviename/edit/actors/:id', getEditActorFilmPage);
+app.post('/films/:moviename/edit/actors/:id', editActorFilm);
 
-//app.get('/films/:moviename/edit/:collection/:id', getEditPersonPage); replace function later
-//app.get('/films/:moviename/add/:collection', getAddPersonFilmPage);
 
 app.get('/persons/:collection', getCollectionPage);
 app.get('/persons/:collection/add', getAddPersonPage);
