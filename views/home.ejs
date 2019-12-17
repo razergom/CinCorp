@@ -1,0 +1,18 @@
+<%- include('header.ejs'); %>
+
+        <section class="jumbotron text-center" style="margin-top:7%">
+            <div class="container">
+                <h1 class="jumbotron-heading"><%= company.name %></h1>
+                <p class="lead text-muted"><%= company.description %></p>
+                <p class="lead text-muted">Found: <%= company.year_found %></p>
+                <p class="lead text-muted">Founder: <%= company.founder.name %></p>
+                <p>
+                    <a href="<%= company.website %>" target="_blank" class="btn btn-secondary my-2">> Official Website</a>
+                </p>
+                <p><a href="/home/edit" rel="noopener"
+                    class="btn btn-sm btn-primary">Edit Information</a></p>
+            </div>
+        </section>
+
+    </body>
+</html>

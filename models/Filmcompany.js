@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 
-const DBRef = mongoose.SchemaType.DBRef;
 const Schema = mongoose.Schema;
+
+let Actor = require('./Actor');
+let Producer = require('./Producer');
+let Operator = require('./Operator');
+let Composer = require('./Composer');
+let Impperson = require('./Impperson');
+let Screenwriter = require('./Screenwriter');
 
 
 let filmcompanySchema = new Schema({
@@ -13,13 +19,13 @@ let filmcompanySchema = new Schema({
         year_found: String,
         website: String
     },
-    founder: { $ref: String, $id: Schema.ObjectId },
+    founder: { type: Schema.Types.ObjectId, ref: 'Impperson' },
     website: String,
     movies: [
         {
             title: String,
             year: String,
-            director: { $ref: String, $id: Schema.ObjectId },
+            director: { type: Schema.Types.ObjectId, ref: 'Impperson' },
             genre: String,
             rating: String,
             budget: String,
@@ -27,14 +33,14 @@ let filmcompanySchema = new Schema({
             time: String,
             actors: [
                 {
-                    actor: { $ref: String, $id: Schema.ObjectId },
+                    actor: { type: Schema.Types.ObjectId, ref: 'Actor' },
                     role: String
                 }
             ],
-            producers: [{ $ref: String, $id: Schema.ObjectId }],
-            composers: [{ $ref: String, $id: Schema.ObjectId }],
-            screenwriters: [{ $ref: String, $id: Schema.ObjectId }],
-            operators: [{ $ref: String, $id: Schema.ObjectId }]
+            producers: [{ type: Schema.Types.ObjectId, ref: 'Producer' }],
+            composers: [{ type: Schema.Types.ObjectId, ref: 'Composer' }],
+            screenwriters: [{ type: Schema.Types.ObjectId, ref: 'Impperson' }],
+            operators: [{ type: Schema.Types.ObjectId, ref: 'Operator' }]
         }
     ]
 });

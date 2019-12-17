@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 let producerSchema = new Schema({
     name: String,
-    year: String,
+    born: String,
     died: String,
     country: String
 });

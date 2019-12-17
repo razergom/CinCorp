@@ -1,0 +1,48 @@
+<%- include('header.ejs'); %>
+
+<h3 class="person-h">Editing Film</h3>
+<form action="" method="post" class="person-edit-form">
+    <div class="form-group">
+        <label for="movie-title">Title</label>
+        <input type="text" class="form-control" name="movie_title" id="movie_title" value="<%= movie.title %>" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-director">Director</label>
+        <select id="movie_director" name="movie_director" class="form-control" value="<%= movie.director %>" required>
+            <% directors.forEach((director, index) => { %>
+            <option<% if (director._id === movie.director._id) { %>selected<% } %>><%= director.name %> (<%= director._id %>)</option>
+            <% }) %>
+        </select>
+    </div>
+    <p class="text-center">No needed director in list? Go <a href="/persons/imppersons/add">here</a> to add this
+        director.</p>
+    <div class="form-group">
+        <label for="movie-year">Year</label>
+        <input type="text" class="form-control" name="movie_year" id="movie_year" value="<%= movie.year %>" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-genre">Genre</label>
+        <input type="text" class="form-control" name="movie_genre" id="movie_genre" value="<%= movie.genre %>" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-rating">Rating</label>
+        <input type="text" class="form-control" name="movie_rating" id="movie_rating" value="<%= movie.rating %>" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-budget">Budget</label>
+        <input type="text" class="form-control" name="movie_budget" id="movie_budget" value="<%= movie.budget %>" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-earn">Earn</label>
+        <input type="text" class="form-control" name="movie_earn" id="movie_earn" value="<%= movie.earn %>" required>
+    </div>
+    <div class="form-group">
+        <label for="movie-time">Time</label>
+        <input type="text" class="form-control" name="movie_time" id="movie_time" value="<%= movie.time %>" required>
+    </div>
+    <button type="submit" class="btn btn-success float-center person-edit-btn">Update Film</button>
+</form>
+
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<%- include('header.ejs'); %>
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h3 class="jumbotron-heading"><%= movie.title %></h1>
+                <p class="lead">Year: <%= movie.year %></p>
+                <p class="lead">Director: <%= movie.director.name %></p>
+                <p class="lead">Genre: <%= movie.genre %></p>
+                <p class="lead">Rating: <%= movie.rating %></p>
+                <p class="lead">Budget: <%= movie.budget %></p>
+                <p class="lead">Earn: <%= movie.earn %></p>
+                <p class="lead">Time: <%= movie.time %></p>
+            </div>
+
+            <div class="film-btn">
+                <a href="/films/<%= movie.title %>/edit" class="btn btn-secondary">Edit Information</a>
+            </div>
+        </section>
+
+        <h3 class="film-h">Actors</h3>
+        <% if (movie.actors.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.actors.forEach((actor, index) => { %>
+                <tr>
+                    <td><%= actor.actor.name %></td>
+                    <td><%= actor.role %></td>
+                    <td><%= actor.actor.born %></td>
+                    <td><%= actor.actor.country %></td>
+                    <td><%= actor.actor.died %></td>
+
+                    <td>
+                        <a href="/films/<%= movie.title %>/edit/actors/<%= actor.actor._id %>" rel="noopener" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/films/<%= movie.title %>/delete/actors/<%= actor.actor._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="/films/<%= movie.title %>/add/actors" class="btn btn-secondary">Add Actor</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No actors found. Go <a href="/films/<%= movie.title %>/add/actors">here</a> to add actors.</p>
+        <% } %>
+
+
+        <h3 class="film-h">Producers</h3>
+        <% if (movie.producers.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.producers.forEach((producer, index) => { %>
+                <tr>
+                    <td><%= producer.name %></td>
+                    <td><%= producer.born %></td>
+                    <td><%= producer.country %></td>
+                    <td><%= producer.died %></td>
+        
+                    <td>
+                        <a href="/films/<%= movie.title %>/delete/producers/<%= producer._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="/films/<%= movie.title %>/add/producers" class="btn btn-secondary">Add Producer</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No producers found. Go <a href="/films/<%= movie.title %>/add/producers">here</a> to add producers.</p>
+        <% } %>
+
+
+        <h3 class="film-h">Screenwriters</h3>
+        <% if (movie.screenwriters.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.screenwriters.forEach((screenwriter, index) => { %>
+                <tr>
+                    <td><%= screenwriter.name %></td>
+                    <td><%= screenwriter.born %></td>
+                    <td><%= screenwriter.country %></td>
+                    <td><%= screenwriter.died %></td>
+        
+                    <td>
+                        <a href="/films/<%= movie.title %>/delete/screenwriters/<%= screenwriter._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="/films/<%= movie.title %>/add/screenwriters" class="btn btn-secondary">Add Screenwriter</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No screenwriters found. Go <a href="/films/<%= movie.title %>/add/screenwriters">here</a> to add screenwriters.</p>
+        <% } %>
+
+
+        <h3 class="film-h">Operators</h3>
+        <% if (movie.operators.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.operators.forEach((operator, index) => { %>
+                <tr>
+                    <td><%= operator.name %></td>
+                    <td><%= operator.born %></td>
+                    <td><%= operator.country %></td>
+                    <td><%= operator.died %></td>
+        
+                    <td>
+                        <a href="/films/<%= movie.title %>/delete/operators/<%= operator._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="/films/<%= movie.title %>/add/operators" class="btn btn-secondary">Add Operator</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No operators found. Go <a href="/films/<%= movie.title %>/add/operators">here</a> to add operators.</p>
+        <% } %>
+
+
+        <h3 class="film-h">Composers</h3>
+        <% if (movie.composers.length > 0) { %>
+        <table class="table table-striped film-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year Of Birth</th>
+                    <th>Country</th>
+                    <th>Died</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movie.composers.forEach((composer, index) => { %>
+                <tr>
+                    <td><%= composer.name %></td>
+                    <td><%= composer.born %></td>
+                    <td><%= composer.country %></td>
+                    <td><%= composer.died %></td>
+        
+                    <td>
+                        <a href="/films/<%= movie.title %>/delete/composers/<%= composer._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="film-btn">
+            <a href="/films/<%= movie.title %>/add/composers" class="btn btn-secondary">Add Composer</a>
+        </div>
+        <% } else { %>
+        <p class="text-center">No composers found. Go <a href="/films/<%= movie.title %>/add/composers">here</a> to add composers.</p>
+        <% } %>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+<%- include('header.ejs'); %>
+
+<h3 class="person-h">Edit</h3>
+<form action="" method="post" class="person-edit-form">
+    <div class="form-group">
+        <label for="existed-person">Edit Actor's Role</label>
+        <input type="text" class="form-control" name="person_role" id="person_role" value="<%= actor.role %>" required>
+    </div>
+    <button type="submit" class="btn btn-success float-center person-edit-btn">Update</button>
+</form>
+</body>
+
+</html>
