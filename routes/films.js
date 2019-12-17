@@ -294,29 +294,26 @@ module.exports = {
                         actors.pop().remove();
                         break;
                     case 'operators':
-                        let operators = movie.operators.filter(operator => {
-                            return operator == person_id;
-                        });
-                        operators.pop().remove();
+                        let operators = movie.operators
+                        operators.splice(operators.indexOf(`${person_id}`), 1);
+                        movie.operators = operators;
                         break;
                     case 'screenwriters':
-                        let screenwriters = movie.screenwriters.filter(screenwriter => {
-                            return screenwriter == person_id;
-                        });
-                        screenwriters.pop().remove();
+                        let screenwriters = movie.screenwriters
+                        screenwriters.splice(screenwriters.indexOf(`${person_id}`), 1);
+                        movie.screenwriters = screenwriters;
                         break;
                     case 'composers':
-                        let composers = movie.composers.filter(composer => {
-                            return composer == person_id;
-                        });
-                        composers.pop().remove();
+                        let composers = movie.composers
+                        composers.splice(composers.indexOf(`${person_id}`), 1);
+                        movie.composers = composers;
                         break;
                     case 'producers':
-                        let producers = movie.producers.filter(producer => {
-                            return producer == person_id;
-                        });
+                        let producers = movie.producers
+                        //console.log(producers);
                         
-                        producers.pop().remove();
+                        producers.splice(producers.indexOf(`${person_id}`), 1);
+                        movie.producers = producers;
                         break;
                 }
                 result.save(err => {
@@ -328,5 +325,11 @@ module.exports = {
                 });
             }
         });
+    },
+    getEditActorFilm:(req, res) => {
+        
+    },
+    editActorFilm: (req, res) => {
+
     }
 }
