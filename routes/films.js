@@ -13,7 +13,8 @@ module.exports = {
             } else {
                 res.render('films.ejs', {
                     title: result.name,
-                    movies: result.movies
+                    movies: result.movies,
+                    user: gluser
                 });
             }
         });
@@ -38,7 +39,8 @@ module.exports = {
 
                 res.render('film.ejs', {
                     title: result.name,
-                    movie: movie
+                    movie: movie,
+                    user: gluser
                 });
             }
         });
@@ -50,7 +52,8 @@ module.exports = {
             } else {
                 res.render('addfilm.ejs', {
                     title: 'Lucasfilm',
-                    directors: result
+                    directors: result,
+                    user: gluser
                 });
             }
         });
@@ -126,7 +129,8 @@ module.exports = {
                             res.render('editfilm.ejs', {
                                 title: result.name,
                                 movie: movie,
-                                directors: directors
+                                directors: directors,
+                                user: gluser
                             });
                         }
                     })
@@ -184,7 +188,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -193,7 +198,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -202,7 +208,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -211,7 +218,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -220,7 +228,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -339,7 +348,8 @@ module.exports = {
                 }).pop();
                 res.render('editactorfilm.ejs', {
                     title: 'Lucasfilm',
-                    actor: actor
+                    actor: actor,
+                    user: gluser
                 });
             }
         });

@@ -18,7 +18,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -28,7 +29,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -38,7 +40,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -48,7 +51,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -58,7 +62,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -66,7 +71,8 @@ module.exports = {
     },
     getAddPersonPage: (req, res) => {
         res.render('addperson.ejs', {
-            title: 'Lucasfilm'
+            title: 'Lucasfilm',
+            user: gluser
         });
     },
     addPerson: (req, res) => {
@@ -221,7 +227,8 @@ module.exports = {
                 Actor.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
@@ -229,7 +236,8 @@ module.exports = {
                 Producer.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
@@ -237,7 +245,8 @@ module.exports = {
                 Operator.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
@@ -245,7 +254,8 @@ module.exports = {
                 Impperson.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
@@ -253,7 +263,8 @@ module.exports = {
                 Composer.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;

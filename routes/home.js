@@ -6,14 +6,14 @@ module.exports = {
         Filmcompany.findOne()
             .populate('founder')
             .exec((err, result) => {
-                console.log(result);
 
                 if (err) {
                     console.log(err);
                 } else {
                     res.render('home.ejs', {
                         title: 'Lucasfilm',
-                        company: result
+                        company: result,
+                        user: gluser
                     });
                 }
             });
@@ -22,14 +22,14 @@ module.exports = {
         Filmcompany.findOne()
             .populate('founder')
             .exec((err, result) => {
-                console.log(result);
 
                 if (err) {
                     console.log(err);
                 } else {
                     res.render('editmain.ejs', {
                         title: 'Lucasfilm',
-                        company: result
+                        company: result,
+                        user: gluser
                     });
                 }
             });
