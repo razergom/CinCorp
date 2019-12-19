@@ -22,6 +22,6 @@ function genPDF(id, name) {
 
 $('#personpdfbtn').click(function (e) { 
     e.preventDefault();
-    genPDF('persontable');
+    genPDF('persontable', 'persons');
     return false; 
 });
