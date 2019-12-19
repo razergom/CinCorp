@@ -44,6 +44,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('public/scripts', express.static(__dirname + '/scripts'));
 app.use(expressValidator());
 
 app.set('port', process.env.port || port);
