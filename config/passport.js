@@ -12,7 +12,7 @@ module.exports = passport => {
                 console.log(err);
             } else {
                 if (!user) {
-                    return done(null, false);
+                    return done(null, false, {message: 'User not found'});
                 }
 
                 // Match Password
@@ -24,7 +24,7 @@ module.exports = passport => {
                             gluser = user;
                             return done(null, user);
                         } else {
-                            return done(null, false);
+                            return done(null, false, {message: 'Wrong Password'});
                         }
                     }
                 });

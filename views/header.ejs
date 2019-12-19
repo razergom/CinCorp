@@ -50,6 +50,18 @@
             text-align: center;
         }
 
+        .alert-error {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        .alert-success_msg {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
     </style>
 </head>
 
@@ -57,29 +69,32 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <h1 class="float-left" style="color: lightgray;"><%= title %>DB</h1>
         <div class="collapse navbar-collapse justify-content-md-left" id="navbarsExample08" style="padding-left: 20px;">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/films">Films</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/persons/actors">Actors</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/persons/producers">Producers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/persons/imppersons">Important Persons</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/persons/composers">Composers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/persons/operators">Operators</a>
-                </li>
-            </ul>
+                <% if (user) { %>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/films">Films</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/persons/actors">Actors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/persons/producers">Producers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/persons/imppersons">Important Persons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/persons/composers">Composers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/persons/operators">Operators</a>
+                        </li>
+                    </ul>
+                <% } %>
+        </div>
             <div class="collapse navbar-collapse" id="navbarsExample081" style="padding-left: 20px; float: right;">
                 <ul class="nav navbar-nav navbar-right">
                     <% if (user) { %>
@@ -96,5 +111,5 @@
                     <% } %>
                 </ul>
             </div>
-        </div>
     </nav>
+    <%- messages('messagestemplate', locals) %>

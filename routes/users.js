@@ -6,7 +6,8 @@ module.exports = {
     getRegisterPage: (req, res) => {
         res.render('register.ejs', {
             title: 'Lucasfilm',
-            user: gluser
+            user: gluser,
+            errors: null
         });
     },
     registerUser: (req, res) => {
@@ -21,7 +22,8 @@ module.exports = {
         if (errors) {
             res.render('register.ejs', {
                 title: 'Lucasfilm',
-                user: gluser
+                user: gluser,
+                errors: errors
             });
         } else {
             let newUser = new User({
@@ -41,6 +43,7 @@ module.exports = {
                                 console.log(errorSave);
                                 return;
                             } else {
+                                req.flash('success', 'You are now registered and can Sign In');
                                 res.redirect('/login');
                             }
                         });

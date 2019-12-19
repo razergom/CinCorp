@@ -70,12 +70,22 @@ module.exports = {
         }
     },
     getAddPersonPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         res.render('addperson.ejs', {
             title: 'Lucasfilm',
             user: gluser
         });
     },
     addPerson: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         let name = req.body.person_name;
         let year = req.body.person_year;
         let died = req.body.person_died;
@@ -167,6 +177,11 @@ module.exports = {
         
     },
     deletePerson: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         let collection = req.params.collection;
         let person_id = req.params.id;
 
@@ -219,6 +234,11 @@ module.exports = {
         }
     },
     getEditPersonPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         let collection = req.params.collection;
         let person_id = req.params.id;
 
@@ -271,6 +291,11 @@ module.exports = {
         }
     },
     editPerson: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         let updateInfo = {};
         updateInfo.name = req.body.person_name;
         updateInfo.born = req.body.person_year;

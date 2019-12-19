@@ -1,5 +1,9 @@
 <%- include('header.ejs'); %>
-
+<% if (errors) { %>
+<% errors.forEach((error, index) => { %>
+<div class="alert alert-danger"><%= error.msg %></div>
+<% }) %>
+<% } %>
 <h3 class="person-h">Register</h3>
 <form action="" method="post" class="person-edit-form">
     <div class="form-group">

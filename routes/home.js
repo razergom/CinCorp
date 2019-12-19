@@ -19,6 +19,11 @@ module.exports = {
             });
     },
     getEditMainInfoPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/home`);
+            return;
+        }
         Filmcompany.findOne()
             .populate('founder')
             .exec((err, result) => {
@@ -35,6 +40,11 @@ module.exports = {
             });
     },
     editMainInfo: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/home`);
+            return;
+        }
         Filmcompany.findOne((err, result) => {
             if (err) {
                 console.log(err);

@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 const expressValidator = require('express-validator');
 const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
+const expressMessages = require('express-messages');
 
 // Init app
 const app = express();
@@ -17,11 +20,26 @@ const dbUsername = 'razergom';
 const dbPassword = 'superpass';
 const dbConnectString = `mongodb+srv://${dbUsername}:${dbPassword}@cinproject-mfszg.mongodb.net/cincorp?retryWrites=true&w=majority`;
 
+
+// Express Session
+app.use(session({
+    secret: 'happy cat',
+    resave: true,
+    saveUninitialized: true
+}));
+
 // Passport Config
 require('./config/passport')(passport);
 // Passport Init
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Express Messages
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.messages = expressMessages(req, res);
+    next();
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -66,48 +84,59 @@ app.get('/register', getRegisterPage);
 app.post('/register', registerUser);
 app.get('/login', getLoginPage);
 
-app.post('/login', (req, res) => {
+app.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/home',
         failureRedirect: '/login',
         failureFlash: true
-    })(req, res);
+    })(req, res, next);
 });
 app.get('/logout', (req, res) => {
-    gluser = null;
     req.logout();
+    gluser = null;
+    req.flash('success', 'Logged Out');
     res.redirect('/login');
 });
 
 
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    } else {
+        req.flash('danger', 'Please Login');
+        res.redirect('/login');
+    }
+}
+
+
 // Company
-app.get('/home', getHomePage);
-app.get('/home/edit', getEditMainInfoPage);
-app.post('/home/edit', editMainInfo);
+app.get('/home', ensureAuthenticated, getHomePage);
+app.get('/home/edit', ensureAuthenticated, getEditMainInfoPage);
+app.post('/home/edit', ensureAuthenticated, editMainInfo);
 
 
 // Films
-app.get('/films', getFilmsPage);
-app.get('/films/:title', getFilmPage);
-app.get('/add/films', getAddFilmPage);
-app.post('/add/films', addFilm);
-app.get('/films/:moviename/delete', deleteFilm);
-app.get('/films/:moviename/edit', getEditFilmPage);
-app.post('/films/:moviename/edit', editFilm);
-app.get('/films/:moviename/add/:collection', getAddPersonFilmPage);
-app.post('/films/:moviename/add/:collection', addPersonFilm);
-app.get('/films/:moviename/delete/:collection/:id', deletePersonFilm);
-app.get('/films/:moviename/edit/actors/:id', getEditActorFilmPage);
-app.post('/films/:moviename/edit/actors/:id', editActorFilm);
+app.get('/films', ensureAuthenticated, getFilmsPage);
+app.get('/films/:title', ensureAuthenticated, getFilmPage);
+app.get('/add/films', ensureAuthenticated, getAddFilmPage);
+app.post('/add/films', ensureAuthenticated, addFilm);
+app.get('/films/:moviename/delete', ensureAuthenticated, deleteFilm);
+app.get('/films/:moviename/edit', ensureAuthenticated, getEditFilmPage);
+app.post('/films/:moviename/edit', ensureAuthenticated, editFilm);
+app.get('/films/:moviename/add/:collection', ensureAuthenticated, getAddPersonFilmPage);
+app.post('/films/:moviename/add/:collection', ensureAuthenticated, addPersonFilm);
+app.get('/films/:moviename/delete/:collection/:id', ensureAuthenticated, deletePersonFilm);
+app.get('/films/:moviename/edit/actors/:id', ensureAuthenticated, getEditActorFilmPage);
+app.post('/films/:moviename/edit/actors/:id', ensureAuthenticated, editActorFilm);
 
 
 // Person Collections
-app.get('/persons/:collection', getCollectionPage);
-app.get('/persons/:collection/add', getAddPersonPage);
-app.post('/persons/:collection/add', addPerson);
-app.get('/persons/:collection/edit/:id', getEditPersonPage);
-app.post('/persons/:collection/edit/:id', editPerson);
-app.get('/persons/:collection/delete/:id', deletePerson);
+app.get('/persons/:collection', ensureAuthenticated, getCollectionPage);
+app.get('/persons/:collection/add', ensureAuthenticated, getAddPersonPage);
+app.post('/persons/:collection/add', ensureAuthenticated, addPerson);
+app.get('/persons/:collection/edit/:id', ensureAuthenticated, getEditPersonPage);
+app.post('/persons/:collection/edit/:id', ensureAuthenticated, editPerson);
+app.get('/persons/:collection/delete/:id', ensureAuthenticated, deletePerson);
 
 
 app.listen(port, () => {
