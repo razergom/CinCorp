@@ -13,7 +13,8 @@ module.exports = {
             } else {
                 res.render('films.ejs', {
                     title: result.name,
-                    movies: result.movies
+                    movies: result.movies,
+                    user: gluser
                 });
             }
         });
@@ -38,24 +39,36 @@ module.exports = {
 
                 res.render('film.ejs', {
                     title: result.name,
-                    movie: movie
+                    movie: movie,
+                    user: gluser
                 });
             }
         });
     },
     getAddFilmPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films`);
+            return;
+        }
         Impperson.find((err, result) => {
             if (err) {
                 console.log(err);
             } else {
                 res.render('addfilm.ejs', {
                     title: 'Lucasfilm',
-                    directors: result
+                    directors: result,
+                    user: gluser
                 });
             }
         });
     },
     addFilm: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films`);
+            return;
+        }
         let movie = {};
         movie.actors = [];
         movie.producers = [];
@@ -90,6 +103,11 @@ module.exports = {
         console.log(movie);
     },
     deleteFilm: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films`);
+            return;
+        }
         Filmcompany.findOne((err, result) => {
             if (err) {
                 console.log(err);
@@ -102,6 +120,7 @@ module.exports = {
                     if (err) {
                         console.log(err);
                     } else {
+                        req.flash('success', 'Movie Deleted');
                         res.redirect('/films');
                     }
                 });
@@ -109,6 +128,11 @@ module.exports = {
         });
     },
     getEditFilmPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films/${req.params.moviename}`);
+            return;
+        }
         Filmcompany.findOne()
             .populate('movies.director')
             .exec((err, result) => {
@@ -126,7 +150,8 @@ module.exports = {
                             res.render('editfilm.ejs', {
                                 title: result.name,
                                 movie: movie,
-                                directors: directors
+                                directors: directors,
+                                user: gluser
                             });
                         }
                     })
@@ -134,6 +159,11 @@ module.exports = {
             });
     },
     editFilm: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films/${req.params.moviename}`);
+            return;
+        }
         let title = req.body.movie_title;
         let year = req.body.movie_year;
         let genre = req.body.movie_genre;
@@ -162,6 +192,7 @@ module.exports = {
                 movie.budget = budget;
                 movie.earn = earn;
                 movie.time = time;
+                movie.director = director;
 
                 result.save(err => {
                     if (err) {
@@ -174,6 +205,11 @@ module.exports = {
         });
     },
     getAddPersonFilmPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films/${req.params.moviename}`);
+            return;
+        }
         const moviename = req.params.moviename;
         const collection = req.params.collection;
 
@@ -184,7 +220,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -193,7 +230,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -202,7 +240,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -211,7 +250,8 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
@@ -220,13 +260,19 @@ module.exports = {
                     res.render('addpersonfilm.ejs', {
                         persons: result,
                         title: 'Lucasfilm',
-                        collection: collection
+                        collection: collection,
+                        user: gluser
                     });
                 });
                 break;
         }
     },
     addPersonFilm: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films/${req.params.moviename}`);
+            return;
+        }
         let title = req.params.moviename;
         let collection = req.params.collection;
 
@@ -275,6 +321,11 @@ module.exports = {
         });
     },
     deletePersonFilm: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films/${req.params.moviename}`);
+            return;
+        }
         let title = req.params.moviename;
         let collection = req.params.collection;
         let person_id = req.params.id;
@@ -327,6 +378,11 @@ module.exports = {
         });
     },
     getEditActorFilmPage:(req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films/${req.params.moviename}`);
+            return;
+        }
         Filmcompany.findOne((err, result) => {
             if (err) {
                 console.log(err);
@@ -339,12 +395,18 @@ module.exports = {
                 }).pop();
                 res.render('editactorfilm.ejs', {
                     title: 'Lucasfilm',
-                    actor: actor
+                    actor: actor,
+                    user: gluser
                 });
             }
         });
     },
     editActorFilm: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/films/${req.params.moviename}`);
+            return;
+        }
         Filmcompany.findOne((err, result) => {
             if (err) {
                 console.log(err);

@@ -6,35 +6,45 @@ module.exports = {
         Filmcompany.findOne()
             .populate('founder')
             .exec((err, result) => {
-                console.log(result);
 
                 if (err) {
                     console.log(err);
                 } else {
                     res.render('home.ejs', {
                         title: 'Lucasfilm',
-                        company: result
+                        company: result,
+                        user: gluser
                     });
                 }
             });
     },
     getEditMainInfoPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/home`);
+            return;
+        }
         Filmcompany.findOne()
             .populate('founder')
             .exec((err, result) => {
-                console.log(result);
 
                 if (err) {
                     console.log(err);
                 } else {
                     res.render('editmain.ejs', {
                         title: 'Lucasfilm',
-                        company: result
+                        company: result,
+                        user: gluser
                     });
                 }
             });
     },
     editMainInfo: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/home`);
+            return;
+        }
         Filmcompany.findOne((err, result) => {
             if (err) {
                 console.log(err);

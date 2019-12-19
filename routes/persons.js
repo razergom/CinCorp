@@ -5,6 +5,7 @@ let Producer = require('../models/Producer');
 let Operator = require('../models/Operator');
 let Composer = require('../models/Composer');
 let Impperson = require('../models/Impperson');
+let Filmcompany = require('../models/Filmcompany');
 
 module.exports = {
     getCollectionPage: (req, res) => {
@@ -18,7 +19,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -28,7 +30,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -38,7 +41,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -48,7 +52,8 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
@@ -58,18 +63,30 @@ module.exports = {
                         persons: result,
                         title: 'Lucasfilm',
                         collection: collection,
-                        collectionForOutput: collectionForOutput
+                        collectionForOutput: collectionForOutput,
+                        user: gluser
                     });
                 });
                 break;
         }
     },
     getAddPersonPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         res.render('addperson.ejs', {
-            title: 'Lucasfilm'
+            title: 'Lucasfilm',
+            user: gluser
         });
     },
     addPerson: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         let name = req.body.person_name;
         let year = req.body.person_year;
         let died = req.body.person_died;
@@ -161,51 +178,194 @@ module.exports = {
         
     },
     deletePerson: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         let collection = req.params.collection;
         let person_id = req.params.id;
 
         switch (collection) {
             case 'actors':
+                Filmcompany.findOne((err, company) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        let movies = company.movies;
+                        movies.forEach((movie, index) => {
+                            let actors = movie.actors.filter(actor => {
+                                return actor.actor == person_id;
+                            });
+                            console.log(actors);
+                            for (let i = 0; i < actors.length; i++) {
+                                console.log(actors[i]);
+                                
+                                actors[i].remove(err => {
+                                    console.log(err);
+                                });
+                            }
+                        });
+                        company.save(err => {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+
                 Actor.deleteOne({ _id: person_id }, (err) => {
                     if (err) {
                         console.log(err);
                     } else {
+                        req.flash('success', 'Person Deleted');
                         res.redirect(`/persons/${collection}`);
                     }
                 });
                 break;
             case 'producers':
+                Filmcompany.findOne((err, company) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        let movies = company.movies;
+                        movies.forEach((movie, index) => {
+                            let delete_count = 0;
+                            let producers = movie.producers;
+                            producers.forEach((producer, index) => {
+                                if (producer == person_id) {
+                                    delete_count = delete_count + 1;
+                                }
+                            });
+                            for (let i = 0; i < delete_count; i++) {
+                                producers.splice(producers.indexOf(`${person_id}`), 1);
+                            }
+                        });
+                        company.save(err => {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+
                 Producer.deleteOne({ _id: person_id }, (err) => {
                     if (err) {
                         console.log(err);
                     } else {
+                        req.flash('success', 'Person Deleted');
                         res.redirect(`/persons/${collection}`);
                     }
                 });
                 break;
             case 'operators':
+                Filmcompany.findOne((err, company) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        let movies = company.movies;
+                        movies.forEach((movie, index) => {
+                            let delete_count = 0;
+                            let operators = movie.operators;
+                            operators.forEach((operator, index) => {
+                                if (operator == person_id) {
+                                    delete_count = delete_count + 1;
+                                }
+                            });
+                            for (let i = 0; i < delete_count; i++) {
+                                operators.splice(operators.indexOf(`${person_id}`), 1);
+                            }
+                        });
+                        company.save(err => {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+
                 Operator.deleteOne({ _id: person_id }, (err) => {
                     if (err) {
                         console.log(err);
                     } else {
+                        req.flash('success', 'Person Deleted');
                         res.redirect(`/persons/${collection}`);
                     }
                 });
                 break;
             case 'imppersons':
+                Filmcompany.findOne((err, company) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        let movies = company.movies;
+                        movies.forEach((movie, index) => {
+                            let delete_count = 0;
+                            let screenwriters = movie.screenwriters;
+                            screenwriters.forEach((screenwriter, index) => {
+                                if (screenwriter == person_id) {
+                                    delete_count = delete_count + 1;
+                                }
+                            });
+                            for (let i = 0; i < delete_count; i++) {
+                                screenwriters.splice(screenwriters.indexOf(`${person_id}`), 1);
+                            }
+
+                            if (movie.director == person_id) {
+                                movie.director = null;
+                            }
+                        });
+                        if (company.founder == person_id) {
+                            company.founder = null;
+                        }
+                        company.save(err => {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+
                 Impperson.deleteOne({ _id: person_id }, (err) => {
                     if (err) {
                         console.log(err);
                     } else {
+                        req.flash('success', 'Person Deleted');
                         res.redirect(`/persons/${collection}`);
                     }
                 });
                 break;
             case 'composers':
+                Filmcompany.findOne((err, company) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        let movies = company.movies;
+                        movies.forEach((movie, index) => {
+                            let delete_count = 0;
+                            let composers = movie.composers;
+                            composers.forEach((composer, index) => {
+                                if (composer == person_id) {
+                                    delete_count = delete_count + 1;
+                                }
+                            });
+                            for (let i = 0; i < delete_count; i++) {
+                                composers.splice(composers.indexOf(`${person_id}`), 1);
+                            }
+                        });
+                        company.save(err => {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+
                 Composer.deleteOne({ _id: person_id }, (err) => {
                     if (err) {
                         console.log(err);
                     } else {
+                        req.flash('success', 'Person Deleted');
                         res.redirect(`/persons/${collection}`);
                     }
                 });
@@ -213,6 +373,11 @@ module.exports = {
         }
     },
     getEditPersonPage: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         let collection = req.params.collection;
         let person_id = req.params.id;
 
@@ -221,7 +386,8 @@ module.exports = {
                 Actor.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
@@ -229,7 +395,8 @@ module.exports = {
                 Producer.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
@@ -237,7 +404,8 @@ module.exports = {
                 Operator.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
@@ -245,7 +413,8 @@ module.exports = {
                 Impperson.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
@@ -253,13 +422,19 @@ module.exports = {
                 Composer.find({ _id: person_id }, (err, result) => {
                     res.render('editperson.ejs', {
                         person: result.pop(),
-                        title: 'Lucasfilm'
+                        title: 'Lucasfilm',
+                        user: gluser
                     });
                 });
                 break;
         }
     },
     editPerson: (req, res) => {
+        if (gluser.permission === 'read') {
+            req.flash('danger', 'You do not have editor rights');
+            res.redirect(`/persons/${req.params.collection}`);
+            return;
+        }
         let updateInfo = {};
         updateInfo.name = req.body.person_name;
         updateInfo.born = req.body.person_year;

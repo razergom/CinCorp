@@ -1,0 +1,25 @@
+<%- include('header.ejs'); %>
+<% if (errors) { %>
+<% errors.forEach((error, index) => { %>
+<div class="alert alert-danger"><%= error.msg %></div>
+<% }) %>
+<% } %>
+<h3 class="person-h">Register</h3>
+<form action="" method="post" class="person-edit-form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" id="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password" required>
+    </div>
+    <div class="form-group">
+        <label for="password2">Confirm Password</label>
+        <input type="password" class="form-control" name="password2" id="password2" required>
+    </div>
+    <button type="submit" class="btn btn-success float-center person-edit-btn">Sign Up</button>
+</form>
+</body>
+
+</html>
