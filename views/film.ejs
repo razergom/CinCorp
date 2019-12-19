@@ -4,7 +4,9 @@
             <div class="container">
                 <h3 class="jumbotron-heading"><%= movie.title %></h1>
                 <p class="lead">Year: <%= movie.year %></p>
-                <p class="lead">Director: <%= movie.director.name %></p>
+                <% if (movie.director) { %>
+                    <p class="lead">Director: <%= movie.director.name %></p>
+                <% } %>
                 <p class="lead">Genre: <%= movie.genre %></p>
                 <p class="lead">Rating: <%= movie.rating %></p>
                 <p class="lead">Budget: <%= movie.budget %></p>

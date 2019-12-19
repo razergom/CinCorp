@@ -192,6 +192,7 @@ module.exports = {
                 movie.budget = budget;
                 movie.earn = earn;
                 movie.time = time;
+                movie.director = director;
 
                 result.save(err => {
                     if (err) {
