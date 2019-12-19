@@ -2,7 +2,7 @@
 
 <h3 class="persons-h"><%= collectionForOutput %></h3>
 <% if (persons.length > 0) { %>
-<table class="table table-striped film-table">
+<table class="table table-striped film-table" id="persontable">
     <thead>
         <tr>
             <th>Name</th>
@@ -31,10 +31,11 @@
 </table>
 <div class="film-btn">
     <a href="/persons/<%= collection %>/add" class="btn btn-secondary">Add Person</a>
+    <a href="" class="btn btn-warning" id="personpdfbtn">Get PDF</a>
 </div>
 <% } else { %>
 <p class="text-center">No persons found. Go <a href="/persons/<%= collection %>/add">here</a> to add persons.</p>
 <% } %>
-
+    <script type="text/javascript" src="/scripts/script.js"></script>
     </body>
 </html>
