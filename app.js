@@ -16,8 +16,8 @@ const port = 5000;
 global.gluser = null;
 
 // Create database connection
-const dbUsername = 'razergom';
-const dbPassword = 'superpass';
+const dbUsername = 'topsecret';
+const dbPassword = 'topsecret';
 const dbConnectString = `mongodb+srv://${dbUsername}:${dbPassword}@cinproject-mfszg.mongodb.net/cincorp?retryWrites=true&w=majority`;
 
 
