@@ -4,6 +4,7 @@
   "description": "package for mongo project",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint ./src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,5 +31,10 @@
     "mongoose-dbref": "0.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
