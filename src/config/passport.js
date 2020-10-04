@@ -22,8 +22,10 @@ module.exports = (passport) => {
           } else {
             if (isMatch) {
               gluser = user;
+
               return done(null, user);
             }
+
             return done(null, false, { message: 'Wrong Password' });
           }
         });

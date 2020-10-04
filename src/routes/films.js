@@ -46,8 +46,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect('/films');
+
       return;
     }
+
     Impperson.find((err, result) => {
       if (err) {
         console.log(err);
@@ -64,8 +66,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect('/films');
+
       return;
     }
+
     const movie = {};
     movie.actors = [];
     movie.producers = [];
@@ -103,8 +107,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect('/films');
+
       return;
     }
+
     Filmcompany.findOne((err, result) => {
       if (err) {
         console.log(err);
@@ -126,8 +132,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/films/${req.params.moviename}`);
+
       return;
     }
+
     Filmcompany.findOne()
       .populate('movies.director')
       .exec((err, result) => {
@@ -155,8 +163,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/films/${req.params.moviename}`);
+
       return;
     }
+
     const title = req.body.movie_title;
     const year = req.body.movie_year;
     const genre = req.body.movie_genre;
@@ -199,8 +209,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/films/${req.params.moviename}`);
+
       return;
     }
+
     const { moviename } = req.params;
     const { collection } = req.params;
 
@@ -261,8 +273,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/films/${req.params.moviename}`);
+
       return;
     }
+
     const title = req.params.moviename;
     const { collection } = req.params;
 
@@ -277,6 +291,7 @@ module.exports = {
         console.log(err);
       } else {
         const movie = result.movies.filter((movie) => movie.title === req.params.moviename).pop();
+
         switch (collection) {
           case 'actors':
             const actor = {};
@@ -297,6 +312,7 @@ module.exports = {
             movie.producers.push(person_id);
             break;
         }
+
         result.save((err) => {
           if (err) {
             console.log(err);
@@ -311,8 +327,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/films/${req.params.moviename}`);
+
       return;
     }
+
     const title = req.params.moviename;
     const { collection } = req.params;
     const person_id = req.params.id;
@@ -322,6 +340,7 @@ module.exports = {
         console.log(err);
       } else {
         const movie = result.movies.filter((movie) => movie.title === req.params.moviename).pop();
+
         switch (collection) {
           case 'actors':
             const actors = movie.actors.filter((actor) => actor.actor == person_id);
@@ -350,6 +369,7 @@ module.exports = {
             movie.producers = producers;
             break;
         }
+
         result.save((err) => {
           if (err) {
             console.log(err);
@@ -364,8 +384,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/films/${req.params.moviename}`);
+
       return;
     }
+
     Filmcompany.findOne((err, result) => {
       if (err) {
         console.log(err);
@@ -384,8 +406,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/films/${req.params.moviename}`);
+
       return;
     }
+
     Filmcompany.findOne((err, result) => {
       if (err) {
         console.log(err);

@@ -72,8 +72,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/persons/${req.params.collection}`);
+
       return;
     }
+
     res.render('addperson.ejs', {
       title: 'Lucasfilm',
       user: gluser,
@@ -83,8 +85,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/persons/${req.params.collection}`);
+
       return;
     }
+
     const name = req.body.person_name;
     const year = req.body.person_year;
     const died = req.body.person_died;
@@ -96,9 +100,11 @@ module.exports = {
         const actor = new Actor();
         actor.name = name;
         actor.born = year;
+
         if (died) {
           actor.died = died;
         }
+
         actor.country = country;
         actor.save((err) => {
           if (err) {
@@ -112,9 +118,11 @@ module.exports = {
         const producer = new Producer();
         producer.name = name;
         producer.born = year;
+
         if (died) {
           producer.died = died;
         }
+
         producer.country = country;
         producer.save((err) => {
           if (err) {
@@ -128,9 +136,11 @@ module.exports = {
         const operator = new Operator();
         operator.name = name;
         operator.born = year;
+
         if (died) {
           operator.died = died;
         }
+
         operator.country = country;
         operator.save((err) => {
           if (err) {
@@ -144,9 +154,11 @@ module.exports = {
         const impperson = new Impperson();
         impperson.name = name;
         impperson.born = year;
+
         if (died) {
           impperson.died = died;
         }
+
         impperson.country = country;
         impperson.save((err) => {
           if (err) {
@@ -160,9 +172,11 @@ module.exports = {
         const copmposer = new Composer();
         copmposer.name = name;
         copmposer.born = year;
+
         if (died) {
           copmposer.died = died;
         }
+
         copmposer.country = country;
         copmposer.save((err) => {
           if (err) {
@@ -178,8 +192,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/persons/${req.params.collection}`);
+
       return;
     }
+
     const { collection } = req.params;
     const person_id = req.params.id;
 
@@ -193,6 +209,7 @@ module.exports = {
             movies.forEach((movie, index) => {
               const actors = movie.actors.filter((actor) => actor.actor == person_id);
               console.log(actors);
+
               for (let i = 0; i < actors.length; i++) {
                 console.log(actors[i]);
 
@@ -232,6 +249,7 @@ module.exports = {
                   delete_count += 1;
                 }
               });
+
               for (let i = 0; i < delete_count; i++) {
                 producers.splice(producers.indexOf(`${person_id}`), 1);
               }
@@ -267,6 +285,7 @@ module.exports = {
                   delete_count += 1;
                 }
               });
+
               for (let i = 0; i < delete_count; i++) {
                 operators.splice(operators.indexOf(`${person_id}`), 1);
               }
@@ -302,6 +321,7 @@ module.exports = {
                   delete_count += 1;
                 }
               });
+
               for (let i = 0; i < delete_count; i++) {
                 screenwriters.splice(screenwriters.indexOf(`${person_id}`), 1);
               }
@@ -310,9 +330,11 @@ module.exports = {
                 movie.director = null;
               }
             });
+
             if (company.founder == person_id) {
               company.founder = null;
             }
+
             company.save((err) => {
               if (err) {
                 console.log(err);
@@ -344,6 +366,7 @@ module.exports = {
                   delete_count += 1;
                 }
               });
+
               for (let i = 0; i < delete_count; i++) {
                 composers.splice(composers.indexOf(`${person_id}`), 1);
               }
@@ -371,8 +394,10 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/persons/${req.params.collection}`);
+
       return;
     }
+
     const { collection } = req.params;
     const person_id = req.params.id;
 
@@ -428,14 +453,18 @@ module.exports = {
     if (gluser.permission === 'read') {
       req.flash('danger', 'You do not have editor rights');
       res.redirect(`/persons/${req.params.collection}`);
+
       return;
     }
+
     const updateInfo = {};
     updateInfo.name = req.body.person_name;
     updateInfo.born = req.body.person_year;
+
     if (req.body.person_died) {
       updateInfo.died = req.body.person_died;
     }
+
     updateInfo.country = req.body.person_country;
 
     const { collection } = req.params;
